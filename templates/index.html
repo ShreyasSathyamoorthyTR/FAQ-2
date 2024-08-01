@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+<form id="myForm" action="/" method="post">
+    <label for="main_area">Choose a Practice Area:</label>
+        <select name="main_area">
+            {% for i in areas %}
+            <option name="main_area" value='{{i}}'>{{i}}</option>
+            {%endfor%}
+        </select>
+        <input type="text" name="sub_area" placeholder="Enter the areas....">
+        <br>
+        <label for="question_count">Choose a number:</label>
+        <select name="question_count">
+            {% for i in range(10,25) %}
+            <option name="question_count" value={{i}}>{{i}}</option>
+            {%endfor%}
+        </select>
+        <button type="submit" name="submit" value="submit">GET</button>
+</form>
+{% endblock %}
