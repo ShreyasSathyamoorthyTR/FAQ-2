@@ -20,7 +20,15 @@ def establish_connection():
 def close_connection(cur,conn):
     cur.close()
     conn.close()
-    
+ 
+def execute_query(query, params=()):
+    """ Helper function to execute a query and fetch results. """
+    cur, conn = establish_connection()
+    cur.execute(query, params)
+    result = cur.fetchall()
+    close_connection(cur, conn)
+    return result
+   
 def access_cache():
     session_id = session.get('session_id')
     extracted_data = extracted_data_cache.get(session_id, [])

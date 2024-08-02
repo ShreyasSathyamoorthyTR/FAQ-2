@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
-from utils import  execute_query,establish_connection,close_connection,access_cache,update_cache,get_data_in_format_areas,get_data_in_format_subareas,capital_each
+from utils import  execute_query,access_cache,update_cache,get_data_in_format_areas,capital_each
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -20,7 +20,7 @@ def subareas():
     question_count = request.form.get('question_count')
     cache[0]["question_count"] = str(question_count)
     practice_area = cache[0].get("selected_practice_areas", "")  
-    prompt1 = (f"Please generate a list of 10 frequently asked questions and answers about {selected_sub_area} that falls under {practice_area} in the law field. Each question should be formatted in an <h1> tag and each answer should be formatted in an <h2> tag. Ensure the questions and answers address various aspects relevant to clients seeking legal assistance, including how different practice areas and sub-practice areas of law firms manage these issues.")
+    prompt1 = (f"Please generate a list of {question_count} frequently asked questions and answers about {selected_sub_area} that falls under {practice_area} in the law field. Each question should be formatted in an <h1> tag and each answer should be formatted in an <h2> tag. Ensure the questions and answers address various aspects relevant to clients seeking legal assistance, including how different practice areas and sub-practice areas of law firms manage these issues.")
     cache[0]["prompt1"] = prompt1
     cache[0]["selected_sub_practice_areas"] = capital_each(selected_sub_area)
     if len(cache[0]["selected_sub_practice_areas"].strip()) <= 2:

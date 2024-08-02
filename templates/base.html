@@ -13,16 +13,14 @@
         const socket=io();
         socket.on("response",(data) => {
             document.getElementById('sub_area').innerHTML = '';
-            let option = document.createElement('option');
-            option.value = "";
-            option.textContent  = "Select sub practice areas";
-            option.id = "select";
-            document.getElementById('sub_area').appendChild(option);
-            let option1 = document.createElement('option');
-            option1.value = "";
-            option1.textContent  = "Others";
-            option1.id = "others";
-            document.getElementById('sub_area').appendChild(option1);
+            const optionsData = [
+            { value: "", textContent: "Select sub practice areas", id: "select" },
+            { value: "", textContent: "Others", id: "others" }
+            ];
+            const subAreaElement = document.getElementById('sub_area');
+            subAreaElement.innerHTML = optionsData.map(({ value, textContent, id }) => 
+                `<option value="${value}" id="${id}">${textContent}</option>`
+            ).join('');
             data.items.forEach((item) => {
                 let option = document.createElement('option');
                 option.value = item;
