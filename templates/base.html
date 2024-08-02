@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.min.js"></script>
 </head>
 <body>
     {% block body %}
     {% endblock %}
+    <script>
+        const socket=io();
+        socket.on("response",(data) => {
+            document.getElementById('sub_area').innerHTML = '';
+            let option = document.createElement('option');
+            option.value = "";
+            option.textContent  = "Select sub practice areas";
+            option.id = "select";
+            document.getElementById('sub_area').appendChild(option);
+            let option1 = document.createElement('option');
+            option1.value = "";
+            option1.textContent  = "Others";
+            option1.id = "others";
+            document.getElementById('sub_area').appendChild(option1);
+            data.items.forEach((item) => {
+                let option = document.createElement('option');
+                option.value = item;
+                option.textContent  = item;
+                option.id = "sub_area"
+                document.getElementById('sub_area').appendChild(option);
+            });
+        });
+        document.getElementById('main_area').addEventListener('click', (e) => {
+            socket.emit('message',e.target.value);
+        });
+    </script>
 </body>
 </html>

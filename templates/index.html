@@ -4,12 +4,17 @@
 
 <form id="myForm" action="/" method="post">
     <label for="main_area">Choose a Practice Area:</label>
-        <select name="main_area">
+        <select name="main_area" id="main_area">
+            <option id="a" name="main_area" value=''>Select the practice area</option>
+            <option id="a" name="main_area" value=''>other</option>
             {% for i in areas %}
-            <option name="main_area" value='{{i}}'>{{i}}</option>
+            <option id="main_area" name="main_area" value='{{i}}'>{{i}}</option>
             {%endfor%}
         </select>
-        <input type="text" name="sub_area" placeholder="Enter the areas....">
+        <select id="sub_area" name="sub_area">
+            <option id="a" name="sub_area" value=''>Select the sub practice area</option>
+            <option id="a" name="sub_area" value=''>other</option>
+        </select>
         <br>
         <label for="question_count">Choose a number:</label>
         <select name="question_count">
@@ -17,6 +22,7 @@
             <option name="question_count" value={{i}}>{{i}}</option>
             {%endfor%}
         </select>
-        <button type="submit" name="submit" value="submit">GET</button>
+        <button id="submit" type="submit" name="submit" value="submit">GET</button>
 </form>
+
 {% endblock %}
